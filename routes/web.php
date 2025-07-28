@@ -29,7 +29,7 @@ Route::get('dashboard', function () {
 // patient
 Route::get('patient', [PatientController::class, 'index'])->name('patients.index');
 Route::post('patients', [PatientController::class, 'addPatient']);
-Route::post('patients/{id}', [PatientController::class, 'updatePatient'])->name('update.patient');
+Route::put('patients/{id}', [PatientController::class, 'updatePatient'])->name('update.patient');
 Route::delete('patients/{id}', [PatientController::class, 'destroy'])->name('destroy.patient');
 
 

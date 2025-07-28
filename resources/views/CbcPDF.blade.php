@@ -121,16 +121,16 @@
             position: absolute;
             top: 10px;
             left: 100px;
-            height: 90px;
-            width: 90px;
+            height: 85px;
+            width: 85px;
         }
 
         .lab_logo {
             position: absolute;
             top: 5px;
             right: 100px;
-            height: 100px;
-            width: 100px;
+            height: 95px;
+            width: 95px;
         }
 
         .pathologist {
