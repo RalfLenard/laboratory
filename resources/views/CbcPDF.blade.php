@@ -188,7 +188,7 @@
                 {{ $patient->date_of_birth ? \Carbon\Carbon::parse($patient->date_of_birth)->format('F j, Y') : ' ' }}
             </td>
             <td><strong>Reported:</strong>
-                {{ \Carbon\Carbon::parse($hematology->reported_at ?? now())->format('F j, Y') }}
+                {{ \Carbon\Carbon::parse($hematology->created_at)->format('F j, Y') }}
             </td>
 
         </tr>

@@ -66,7 +66,7 @@ class PatientController extends Controller
             });
         }
 
-        $patients = $patientsQuery->paginate(2)->withQueryString(); // 👈 keeps query string on pagination
+        $patients = $patientsQuery->paginate(50)->withQueryString(); // 👈 keeps query string on pagination
 
         return Inertia::render('patient', [
             'patients' => $patients->through(function ($patient) {
