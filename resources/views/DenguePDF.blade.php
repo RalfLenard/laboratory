@@ -172,17 +172,17 @@
             text-indent: 4px;
         }
 
-        .pad-top{
-          
+        .pad-top {
+
             border-bottom: solid 2px black;
 
         }
 
-        .pad-bot{
+        .pad-bot {
             padding-bottom: 150px;
         }
 
-        .pl{
+        .pl {
             padding-left: 100px;
         }
     </style>
@@ -242,27 +242,27 @@
 
     <table class="analysis-table mt-15 mb-15" style="width: 100%;">
 
-    <tr>
-        <td class="pad-top pl"><b>Test</b></td>
-        <td class="pad-top"><b>Result:</b></td>
-    </tr>
+        <tr>
+            <td class="pad-top pl"><b>Test</b></td>
+            <td class="pad-top"><b>Result:</b></td>
+        </tr>
 
-    <tr>
-    <td class="pl" style="padding-right: 40px;"><b>Dengue Ns1 Antigen / Igm, IgG Antibody</b></td>
-    @if (!empty($serology->dd_result))
-        @php
+        <tr>
+            <td class="pl" style="padding-right: 40px;"><b>Dengue Ns1 Antigen / Igm, IgG Antibody</b></td>
+            @if (!empty($serology->dd_result))
+            @php
             $dd_res = is_array($serology->dd_result)
-                ? $serology->dd_result
-                : json_decode($serology->dd_result, true);
-        @endphp
+            ? $serology->dd_result
+            : json_decode($serology->dd_result, true);
+            @endphp
 
-        <td rowspan="3">
-            @foreach ($dd_res as $item)
+            <td rowspan="3">
+                @foreach ($dd_res as $item)
                 @php
-                    $type = strtoupper($item['type']);
-                    $value = isset($item['details'][0]) ? strtoupper($item['details'][0]) : 'N/A';
-                    $color = in_array($value, ['POSITIVE', 'REACTIVE']) ? 'red' : 'black';
-                    $padding = in_array($value, ['POSITIVE', 'REACTIVE']) ? '40px' : '15px';
+                $type = strtoupper($item['type']);
+                $value = isset($item['details'][0]) ? strtoupper($item['details'][0]) : 'N/A';
+                $color = in_array($value, ['POSITIVE', 'REACTIVE']) ? 'red' : 'black';
+                $padding = in_array($value, ['POSITIVE', 'REACTIVE']) ? '40px' : '15px';
                 @endphp
 
                 <div style="padding-right: {{ $padding }}; line-height: 1.5;">
@@ -271,10 +271,10 @@
                         {{ ucfirst(strtolower($value)) }}
                     </b>
                 </div>
-            @endforeach
-        </td>
-    @endif
-</tr>
+                @endforeach
+            </td>
+            @endif
+        </tr>
 
 
 
@@ -283,23 +283,28 @@
 
 
         <tr>
-            <td class="pl">Kit use: {{ $serology->dd_kit ?? ' ' }}</td>
+            <td class="pl">Kit use: {{ $serology->kit->kit_name ?? ' ' }}</td>
             <td></td>
         </tr>
 
         <tr>
-            <td class="pl">LOT NO. {{ $serology->dd_lot_no ?? ' ' }}</td>
+            <td class="pl">LOT NO. {{ $serology->kit->kit_lot_no ?? ' ' }}</td>
             <td></td>
         </tr>
 
         <tr>
-            <td class="pl">Expiration Date:  {{ \Carbon\Carbon::parse($serology->dd_expiration_date ?? now())->format('F Y') }}</td>
+            <td class="pl">
+                Expiration Date:
+                {{ optional($serology->kit)->kit_expiration_date 
+            ? \Carbon\Carbon::parse($serology->kit->kit_expiration_date)->format('F Y') 
+            : ' ' }}
+            </td>
             <td></td>
         </tr>
 
         <tr>
-        <td class="pad-bot"></td>
-        <td class="pad-bot"></td>
+            <td class="pad-bot"></td>
+            <td class="pad-bot"></td>
         </tr>
 
     </table>
@@ -316,15 +321,15 @@
                     Medical Technologist &nbsp;&nbsp;&nbsp;&nbsp; Lic. No.:
 
                     @if ($serology->medical_technologist === 'JULLIUS D. ANUSENCION, RMT')
-                        0056624
+                    0056624
                     @elseif ($serology->medical_technologist === 'KRISTINA CASSANDRA F. SANTOS, RMT')
-                        0099818
+                    0099818
                     @elseif ($serology->medical_technologist === 'KATE ANGELINE M. SALAS, RMT')
-                        0115834
+                    0115834
                     @elseif ($serology->medical_technologist === 'MARY GRACE L. BERNARDO, RMT')
-                        0105656
+                    0105656
                     @elseif ($serology->medical_technologist === 'JANIELLE M. PASAMONTE, RMT')
-                        0092719
+                    0092719
                     @endif
                 </p>
             </td>

@@ -276,18 +276,22 @@
 
 
         <tr>
-            <td class="pl">Kit use: {{ $serology->hbsag_kit ?? ' ' }}</td>
+            <td class="pl">Kit use: {{ $serology->kit->kit_name ?? ' ' }}</td>
             <td></td>
         </tr>
 
         <tr>
-            <td class="pl">LOT NO. {{ $serology->hbsag_lot_no ?? ' ' }}</td>
+            <td class="pl">LOT NO. {{ $serology->kit->kit_lot_no ?? ' ' }}</td>
             <td></td>
         </tr>
 
         <tr>
-            <td class="pl">Expiration Date:
-                {{ \Carbon\Carbon::parse($serology->hbsag_expiration_date ?? now())->format('F Y') }}</td>
+            <td class="pl">
+                Expiration Date:
+                {{ optional($serology->kit)->kit_expiration_date 
+            ? \Carbon\Carbon::parse($serology->kit->kit_expiration_date)->format('F Y') 
+            : ' ' }}
+            </td>
             <td></td>
         </tr>
 

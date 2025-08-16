@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kit;
 use App\Models\Patient;
 use App\Models\Serology;
 use Illuminate\Http\Request;
@@ -9,47 +10,65 @@ use Inertia\Inertia;
 
 class SerologyController extends Controller
 {
+    // public function index($patientId = null)
+    // {
+    //     if ($patientId) {
+    //         // Fetch clinical tests for a specific patient
+    //         $serologyTests = Serology::where('patient_id', $patientId)->get();
+    //     } else {
+    //         // Fetch all clinical tests
+    //         $serologyTests = Serology::all();
+    //     }
+
+    //     // Fetch all patients to populate the search dropdown
+    //     $patients = Patient::all(); // Fetch all patients
+
+    //     // Return Inertia response with clinical test data and patients
+    //     return Inertia::render('serology', [
+    //         'serologyTests' => $serologyTests,
+    //         'patients' => $patients, // Pass the patients data
+    //         'flash' => [
+    //             'success' => session('success'),
+    //             'error' => session('error')
+    //         ]
+    //     ]);
+    // }
+
     public function index($patientId = null)
     {
-        if ($patientId) {
-            // Fetch clinical tests for a specific patient
-            $serologyTests = Serology::where('patient_id', $patientId)->get();
-        } else {
-            // Fetch all clinical tests
-            $serologyTests = Serology::all();
-        }
-
-        // Fetch all patients to populate the search dropdown
-        $patients = Patient::all(); // Fetch all patients
-
-        // Return Inertia response with clinical test data and patients
+        $serologyTests = Serology::with(['patient', 'kit'])
+            ->when($patientId, function ($query) use ($patientId) {
+                $query->where('patient_id', $patientId);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+    
+        $patients = Patient::all();
+        $kits = Kit::all();
+    
         return Inertia::render('serology', [
             'serologyTests' => $serologyTests,
-            'patients' => $patients, // Pass the patients data
+            'patients' => $patients,
+            'kits' => $kits,
             'flash' => [
                 'success' => session('success'),
                 'error' => session('error')
             ]
         ]);
     }
-
+    
 
     public function storeSerology(Request $request)
     {
         $validated = $request->validate([
             'patient_id' => 'required|exists:patient,id',
+            'kit_id' => 'required|exists:kits,id',
 
             // Syphilis
-            'ss_kit' => 'nullable|string',
-            'ss_lot_no' => 'nullable|string',
-            'ss_expiration_date' => 'nullable|date',
             'ss_result' => 'nullable|array',
             'ss_remarks' => 'nullable|string',
 
             // Dengue
-            'dd_kit' => 'nullable|string',
-            'dd_lot_no' => 'nullable|string',
-            'dd_expiration_date' => 'nullable|date',
             'dd_result' => 'nullable|array',
             'dd_result.*.type' => 'required|string',
             'dd_result.*.details' => 'nullable|array',
@@ -57,16 +76,10 @@ class SerologyController extends Controller
             'dd_remarks' => 'nullable|string',
 
             // HBSAG
-            'hbsag_kit' => 'nullable|string',
-            'hbsag_lot_no' => 'nullable|string',
-            'hbsag_expiration_date' => 'nullable|date',
             'hbsag_result' => 'nullable|array',
             'hbsag_remarks' => 'nullable|string',
 
             // HIV
-            'hiv_kit' => 'nullable|string',
-            'hiv_lot_no' => 'nullable|string',
-            'hiv_expiration_date' => 'nullable|date',
             'hiv_result' => 'nullable|array',
             'hiv_result.*.type' => 'required|string',
             'hiv_result.*.details' => 'nullable|array',
@@ -87,34 +100,24 @@ class SerologyController extends Controller
     {
         $validated = $request->validate([
             'patient_id' => 'required|exists:patient,id',
+            'kit_id' => 'required|exists:kits,id',
 
             // Syphilis
-            'ss_kit' => 'nullable|string',
-            'ss_lot_no' => 'nullable|string',
-            'ss_expiration_date' => 'nullable|date',
             'ss_result' => 'nullable|array',
             'ss_remarks' => 'nullable|string',
 
             // Dengue
-            'dd_kit' => 'nullable|string',
-            'dd_lot_no' => 'nullable|string',
-            'dd_expiration_date' => 'nullable|date',
             'dd_result' => 'nullable|array',
             'dd_result.*.type' => 'required|string',
             'dd_result.*.details' => 'nullable|array',
+
             'dd_remarks' => 'nullable|string',
 
             // HBSAG
-            'hbsag_kit' => 'nullable|string',
-            'hbsag_lot_no' => 'nullable|string',
-            'hbsag_expiration_date' => 'nullable|date',
             'hbsag_result' => 'nullable|array',
             'hbsag_remarks' => 'nullable|string',
 
             // HIV
-            'hiv_kit' => 'nullable|string',
-            'hiv_lot_no' => 'nullable|string',
-            'hiv_expiration_date' => 'nullable|date',
             'hiv_result' => 'nullable|array',
             'hiv_result.*.type' => 'required|string',
             'hiv_result.*.details' => 'nullable|array',

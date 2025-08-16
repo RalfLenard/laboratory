@@ -10,6 +10,7 @@ class Serology extends Model
 
     protected $fillable = [
         'patient_id',
+        'kit_id',
         'ss_kit', 'ss_lot_no', 'ss_expiration_date', 'ss_result', 'ss_remarks',
         'dd_kit', 'dd_lot_no', 'dd_expiration_date', 'dd_result', 'dd_remarks',
         'hbsag_kit', 'hbsag_lot_no', 'hbsag_expiration_date', 'hbsag_result', 'hbsag_remarks',
@@ -28,4 +29,10 @@ class Serology extends Model
     {
         return $this->belongsTo(Patient::class);
     }
+
+    public function kit()
+    {
+        return $this->belongsTo(Kit::class, 'kit_id');
+    }
+
 }

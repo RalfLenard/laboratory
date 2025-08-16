@@ -136,10 +136,11 @@ class PrintController extends Controller
     }
 
 
-    // syphilis
+  // syphilis
     public function generateSyphilisPdf($id)
     {
-        $serology = Serology::findOrFail($id);
+        // eager load kit with serology
+        $serology = Serology::with('kit')->findOrFail($id);
         $patient = $serology->patient;
 
         // Compute age
@@ -150,7 +151,11 @@ class PrintController extends Controller
             ? Carbon::parse($patient->date_of_birth)->translatedFormat('F j, Y')
             : 'N/A';
 
-        $html = View::make('SyphilisPDF', compact('serology', 'patient'))->render();
+        // Access kit info safely
+        $kit = $serology->kit;
+
+        // pass kit to view also
+        $html = View::make('SyphilisPDF', compact('serology', 'patient', 'kit'))->render();
 
         return response(
             Browsershot::html($html)
@@ -166,10 +171,12 @@ class PrintController extends Controller
         );
     }
 
-    // Hbsag
+
+    //HBSAG
     public function generateHbsagPdf($id)
     {
-        $serology = Serology::findOrFail($id);
+        // eager load kit with serology
+        $serology = Serology::with('kit')->findOrFail($id);
         $patient = $serology->patient;
 
         // Compute age
@@ -180,7 +187,11 @@ class PrintController extends Controller
             ? Carbon::parse($patient->date_of_birth)->translatedFormat('F j, Y')
             : 'N/A';
 
-        $html = View::make('HbsagPDF', compact('serology', 'patient'))->render();
+        // Access kit info safely
+        $kit = $serology->kit;
+
+        // pass kit to view also
+        $html = View::make('HbsagPDF', compact('serology', 'patient', 'kit'))->render();
 
         return response(
             Browsershot::html($html)
@@ -191,16 +202,18 @@ class PrintController extends Controller
             200,
             [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="hbsag_report.pdf"',
+                'Content-Disposition' => 'inline; filename="syphilis_report.pdf"',
             ]
         );
     }
 
+   
 
     // dengue
     public function generateDenguePdf($id)
     {
-        $serology = Serology::findOrFail($id);
+        // eager load kit with serology
+        $serology = Serology::with('kit')->findOrFail($id);
         $patient = $serology->patient;
 
         // Compute age
@@ -211,7 +224,11 @@ class PrintController extends Controller
             ? Carbon::parse($patient->date_of_birth)->translatedFormat('F j, Y')
             : 'N/A';
 
-        $html = View::make('DenguePDF', compact('serology', 'patient'))->render();
+        // Access kit info safely
+        $kit = $serology->kit;
+
+        // pass kit to view also
+        $html = View::make('DenguePDF', compact('serology', 'patient', 'kit'))->render();
 
         return response(
             Browsershot::html($html)
@@ -222,7 +239,7 @@ class PrintController extends Controller
             200,
             [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="dengue_report.pdf"',
+                'Content-Disposition' => 'inline; filename="syphilis_report.pdf"',
             ]
         );
     }
@@ -230,7 +247,8 @@ class PrintController extends Controller
     // hiv
     public function generateHivPdf($id)
     {
-        $serology = Serology::findOrFail($id);
+        // eager load kit with serology
+        $serology = Serology::with('kit')->findOrFail($id);
         $patient = $serology->patient;
 
         // Compute age
@@ -241,7 +259,11 @@ class PrintController extends Controller
             ? Carbon::parse($patient->date_of_birth)->translatedFormat('F j, Y')
             : 'N/A';
 
-        $html = View::make('HivPDF', compact('serology', 'patient'))->render();
+        // Access kit info safely
+        $kit = $serology->kit;
+
+        // pass kit to view also
+        $html = View::make('HivPDF', compact('serology', 'patient', 'kit'))->render();
 
         return response(
             Browsershot::html($html)
@@ -252,7 +274,7 @@ class PrintController extends Controller
             200,
             [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="hiv_report.pdf"',
+                'Content-Disposition' => 'inline; filename="syphilis_report.pdf"',
             ]
         );
     }

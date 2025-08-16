@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChemistryController;
 use App\Http\Controllers\ClinicalController;
 use App\Http\Controllers\HematologyController;
+use App\Http\Controllers\KitsController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\SerologyController;
@@ -56,6 +57,12 @@ Route::get('/chemistry/{patientId?}', [ChemistryController::class, 'index'])->na
 Route::post('/chemistry-test', [ChemistryController::class, 'storeChemistry'])->name('chemistry.store');
 Route::put('/chemistry/{id}', [ChemistryController::class, 'updateChemistry'])->name('chemistry.update');
 Route::delete('/chemistry/{id}', [ChemistryController::class, 'destroy'])->name('chemistry.destroy');
+
+// Kits
+Route::get('kits', [KitsController::class, 'index'])->name('kits.index');
+Route::post('kits', [KitsController::class, 'store'])->name('kits.store');
+Route::put('kits/{id}', [KitsController::class, 'update'])->name('kits.update');
+Route::delete('kits/{id}', [KitsController::class, 'destroy'])->name('kits.delete');
 
 
 // generate pdf

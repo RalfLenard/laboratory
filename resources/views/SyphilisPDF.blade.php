@@ -254,43 +254,46 @@
         <tr>
             <td class="pl" style="padding-right:40px;"><b>SYPHILIS SCREENING</b></td>
             @if (!empty($serology->ss_result))
-                @php
-                    $ss_res = is_array($serology->ss_result)
-                        ? $serology->ss_result
-                        : json_decode($serology->ss_result, true);
+            @php
+            $ss_res = is_array($serology->ss_result)
+            ? $serology->ss_result
+            : json_decode($serology->ss_result, true);
 
-                    // Get string if wrapped in array
-                    $result = is_array($ss_res) ? $ss_res[0] : $ss_res;
+            // Get string if wrapped in array
+            $result = is_array($ss_res) ? $ss_res[0] : $ss_res;
 
-                    // Determine dynamic padding
-                    $padding = strtoupper($result) === 'REACTIVE' ? '40px' : '0px';
-                @endphp
+            // Determine dynamic padding
+            $padding = strtoupper($result) === 'REACTIVE' ? '40px' : '0px';
+            @endphp
 
-                <td style="padding-right: {{ $padding }};">
-                    <b class="cap" style="color: {{ strtoupper($result) === 'REACTIVE' ? 'red' : 'black' }};">
-                        {{ ucfirst(strtolower($result)) }}
-                    </b>
-                </td>
+            <td style="padding-right: {{ $padding }};">
+                <b class="cap" style="color: {{ strtoupper($result) === 'REACTIVE' ? 'red' : 'black' }};">
+                    {{ ucfirst(strtolower($result)) }}
+                </b>
+            </td>
             @endif
         </tr>
 
 
 
 
-
         <tr>
-            <td class="pl">Kit use: {{ $serology->ss_kit ?? ' ' }}</td>
+            <td class="pl">Kit use: {{ $serology->kit->kit_name ?? ' ' }}</td>
             <td></td>
         </tr>
 
         <tr>
-            <td class="pl">LOT NO. {{ $serology->ss_lot_no ?? ' ' }}</td>
+            <td class="pl">LOT NO. {{ $serology->kit->kit_lot_no ?? ' ' }}</td>
             <td></td>
         </tr>
 
         <tr>
-            <td class="pl">Expiration Date:
-                {{ \Carbon\Carbon::parse($serology->ss_expiration_date ?? now())->format('F Y') }}</td>
+            <td class="pl">
+                Expiration Date:
+                {{ optional($serology->kit)->kit_expiration_date 
+            ? \Carbon\Carbon::parse($serology->kit->kit_expiration_date)->format('F Y') 
+            : ' ' }}
+            </td>
             <td></td>
         </tr>
 
@@ -318,15 +321,15 @@
                     Medical Technologist &nbsp;&nbsp;&nbsp;&nbsp; Lic. No.:
 
                     @if ($serology->medical_technologist === 'JULLIUS D. ANUSENCION, RMT')
-                        0056624
+                    0056624
                     @elseif ($serology->medical_technologist === 'KRISTINA CASSANDRA F. SANTOS, RMT')
-                        0099818
+                    0099818
                     @elseif ($serology->medical_technologist === 'KATE ANGELINE M. SALAS, RMT')
-                        0115834
+                    0115834
                     @elseif ($serology->medical_technologist === 'MARY GRACE L. BERNARDO, RMT')
-                        0105656
+                    0105656
                     @elseif ($serology->medical_technologist === 'JANIELLE M. PASAMONTE, RMT')
-                        0092719
+                    0092719
                     @endif
                 </p>
             </td>
