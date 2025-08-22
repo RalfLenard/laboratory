@@ -381,6 +381,8 @@ const castsOptions = [
     { value: 'wbc', label: 'WBC Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
     { value: 'fine_granular', label: 'Fine Granular Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
     { value: 'waxy', label: 'Waxy Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'cgc', label: 'Coarse Granular Cast', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    
 ];
 
 const handleCastSelection = (castType) => {
@@ -541,7 +543,7 @@ const proteinOptions = ['Negative', 'Trace', '1+', '2+', '3+', '4+'];
 const spgravityOptions = ['1.000', '1.005', '1.010', '1.015', '1.020', '1.025', '1.030'];
 const bacteriaOptions = ['None', 'Rare', 'Few', 'Moderate', 'Many'];
 const epithelialCellsOptions = ['None', 'Rare', 'Few', 'Moderate', 'Many'];
-const urinalysisColorOptions = ['Straw', 'Yellow', 'Light Yellow', 'Amber', 'Pink', 'Red', 'Brown', 'Green'];
+const urinalysisColorOptions = ['Straw', 'Yellow', 'Light Yellow', 'Dark Yellow', 'Amber', 'Pink', 'Red', 'Brown', 'Green'];
 const urinalysisTransparencyOptions = ['Clear', 'Hazy', 'Slightly Turbid', 'Turbid'];
 const amorphousUratesOptions = ['None', 'Rare', 'Few', 'Moderate', 'Many'];
 const amorphousPhospatesOptions = ['None', 'Rare', 'Few', 'Moderate', 'Many'];
@@ -1224,7 +1226,7 @@ const print = (test) => {
                                         <!-- Casts Section -->
                                         <div class="mt-8">
                                             <label class="block text-lg font-semibold text-gray-800 mb-4">Casts</label>
-                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-3 gap-4">
                                                 <div v-for="cast in castsOptions" :key="cast.value"
                                                      class="border-2 border-gray-200 rounded-xl p-4 hover:border-purple-300 transition-all duration-200 bg-white">
                                                     <label class="flex items-center space-x-3 mb-3">
