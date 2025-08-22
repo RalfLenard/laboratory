@@ -376,12 +376,12 @@ const selectedCastTypes = ref([]);
 const castDetailsMap = reactive({});
 
 const castsOptions = [
-    { value: 'hyaline', label: 'Hyaline Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'rbc', label: 'RBC Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'wbc', label: 'WBC Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'fine_granular', label: 'Fine Granular Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'waxy', label: 'Waxy Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'cgc', label: 'Coarse Granular Cast', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Casts', label: 'Hyaline Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'RBC Casts', label: 'RBC Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'WBC Casts', label: 'WBC Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Fine Granular Casts', label: 'Fine Granular Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Waxy Casts', label: 'Waxy Casts', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Coarse Granular Cast', label: 'Coarse Granular Cast', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
     
 ];
 
@@ -405,22 +405,22 @@ watch([selectedCastTypes, castDetailsMap], () => {
 }, { deep: true });
 
 const crystalsOptions = [
-    { value: 'ammonium_biurate', label: 'Ammonium biurate', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'bilirubin', label: 'Bilirubin', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'calcium_oxalate', label: 'Calcium oxalate', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'cystine', label: 'Cystine', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'hippuric_acid', label: 'Hippuric acid', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'leucine', label: 'Leucine', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'struvite', label: 'Struvite', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'tyrosine', label: 'Tyrosine', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'uric_acid', label: 'Uric acid', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'xanthine', label: 'Xanthine', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Ammonium Biurate', label: 'Ammonium Biurate', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Bilirubin', label: 'Bilirubin', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Calcium Oxalate', label: 'Calcium Oxalate', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Cystine', label: 'Cystine', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Hippuric Acid', label: 'Hippuric Acid', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Leucine', label: 'Leucine', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Struvite', label: 'Struvite', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Tyrosine', label: 'Tyrosine', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Uric Acid', label: 'Uric Acid', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Xanthine', label: 'Xanthine', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
 ];
 
 const fungalOptions = [
-    { value: 'yeast_cells', label: 'Yeast Cells', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'pseudohyphae', label: 'Pseudohyphae', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
-    { value: 'hyphae', label: 'Hyphae', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Yeast Cells', label: 'Yeast Cells', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Pseudohyphae', label: 'Pseudohyphae', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
+    { value: 'Hyphae', label: 'Hyphae', subOptions: ['Rare', 'Few', 'Moderate', 'Many'] },
 ];
 
 const parasiteOptions = [
